@@ -1,0 +1,15 @@
+{
+    "Logging": {
+        "LogLevel": {
+            "Default": "Information",
+            "Microsoft.AspNetCore": "Warning"
+        }
+    },
+    "ConnectionStrings": {
+        "Default": "Server=(localdb)\\mssqllocaldb;Database=MyAirVinyl;Trusted_Connection=True;"
+    },
+    "AllowedHosts": "*",
+    "AppSettings": {
+        "ConnectionName": "Default"
+    }
+}

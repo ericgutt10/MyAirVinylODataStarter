@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Title>Blazr Base Component Library</Title>
+    <Company>Cold Elm Coders</Company>
+    <Authors>Shaun Curtis</Authors>
+    <Description>A base component library to replace ComponentBase</Description>
+    <Copyright>Use and Donate</Copyright>
+    <PackageReadmeFile>Package.md</PackageReadmeFile>
+    <Version>1.0.1</Version>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.2" />
+  </ItemGroup>
+
+
+</Project>

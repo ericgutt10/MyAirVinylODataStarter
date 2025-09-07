@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+
+      <!--<PackageReference Include="Blazr.FluentValidation" Version="1.0.1" />
+      <PackageReference Include="Blazr.RenderState" Version="1.0.0" />-->
+
+      <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="9.0.2" />
+      <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components" Version="4.11.6" />
+      <PackageReference Include="Microsoft.FluentUI.AspNetCore.Components.Icons" Version="4.11.6" />
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Delta.Presentation.FluentUI\Delta.Presentation.FluentUI.csproj" />
+    <ProjectReference Include="..\References\Blazr.FluentValidation\Blazr.FluentValidation.csproj" />
+    <ProjectReference Include="..\References\Blazr.RenderState\Blazr.RenderState.csproj" />
+  </ItemGroup>
+
+</Project>

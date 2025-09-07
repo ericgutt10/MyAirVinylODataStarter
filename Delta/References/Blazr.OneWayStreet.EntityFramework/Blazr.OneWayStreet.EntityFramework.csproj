@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<Authors>Shaun Curtis</Authors>
+		<Company>Cold Elm Coders</Company>
+		<Description>A Read Only Data Pipeline</Description>
+		<Copyright>Use and Donate</Copyright>
+		<AssemblyVersion>2.0.4</AssemblyVersion>
+		<FileVersion>2.0.4</FileVersion>
+		<Version>2.0.4</Version>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Blazr.OneWayStreet" Version="2.0.3" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.2" />
+		<PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="9.0.2" />
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="license.txt">
+	    <PackagePath>\</PackagePath>
+	    <Pack>True</Pack>
+	  </None>
+	</ItemGroup>
+
+
+</Project>

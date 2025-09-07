@@ -1,0 +1,22 @@
+﻿@page "/weather"
+@using Beta.UI.Features.Weather._Components
+@attribute [StreamRendering(true)]
+@* @attribute [OutputCache(Duration = 5)] *@
+
+
+<PageTitle>Weather</PageTitle>
+
+<h1>Weather</h1>
+
+<WeatherGrid GridPagination="@basicSelectorPagination" />
+@code {
+
+    PaginationState basicSelectorPagination = default!;
+
+
+    protected override void OnInitialized()
+    {
+        basicSelectorPagination = new PaginationState { ItemsPerPage = 10 };
+    }
+
+}

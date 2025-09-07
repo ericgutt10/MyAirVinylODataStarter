@@ -1,0 +1,63 @@
+﻿@using Beta.UI.Features.Weather._Lib
+@using Beta.UI.Lib
+@using Blazr.FluxGate
+@inject WeatherApiClient WeatherApi
+@inject WeatherProvider Provider
+@inject KeyedFluxGateStore<GridState, Guid> KeyedStore
+
+<FluentDataGrid @ref=weatherForecastItemsGrid
+                ItemsProvider=GetItemsAsync
+                TGridItem=WeatherForecast
+                Pagination=GridPagination>
+    <PropertyColumn Property="@(p => p.Summary)" Sortable=true />
+</FluentDataGrid>
+<FluentPaginator State=GridPagination />
+
+
+@code {
+
+    [Parameter, EditorRequired]
+    public PaginationState? GridPagination { get; set; }
+
+    private static Guid PageUid = Guid.NewGuid();
+    FluentDataGrid<WeatherForecast>? weatherForecastItemsGrid;
+
+    private async ValueTask<GridItemsProviderResult<WeatherForecast>> GetItemsAsync(GridItemsProviderRequest<WeatherForecast> request)
+    {
+        KeyedStore.Dispatch(PageUid, new UpdateGridPaging(this, StartIndex: request.StartIndex, PageSize: request.Count ?? GridPagination?.ItemsPerPage ?? 0));
+        return await Provider.GetItemsAsync(request, CancellationToken.None);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        bool update = false;
+        if (weatherForecastItemsGrid is null)
+        {
+            weatherForecastItemsGrid = new();
+            update = true;
+        }
+
+        if (update)
+        {
+            StateHasChanged();
+        }
+
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var store = KeyedStore.GetOrCreateStore(PageUid, new GridState(0, GridPagination?.ItemsPerPage ?? 0));
+
+        ArgumentNullException.ThrowIfNull(GridPagination);
+
+        GridPagination.TotalItemCountChanged += OnPageTotalCountChanged;
+        GridPagination.ItemsPerPage = store.Item.PageSize;
+        await GridPagination.SetCurrentPageIndexAsync(store.Item.Page);
+
+    }
+    private void OnPageTotalCountChanged(object? sender, int? args)
+    {
+        StateHasChanged();
+    }
+}

@@ -1,0 +1,116 @@
+﻿@using Delta.Core.Utilities
+@using Delta.Core.WeatherForecast
+@using Delta.Presentation.FluentUI.Presenters
+
+
+
+@inject FluentUIPresenterFactory PresenterFactory
+@inject IDialogService DialogService
+
+
+<FluentHeader Style="background-color: transparent; color: black;">
+    <h3>Weather Forecasts</h3>
+    <FluentSpacer />
+    <FluentButton Color="var(--info)" IconStart="@(new Icons.Regular.Size16.AddCircle())"
+                  OnClick="@OnAddAsync">
+        New Weather Forecast
+    </FluentButton>
+
+</FluentHeader>
+
+<FluentDataGrid Id="weathergrid"
+                @ref="_fluentDataGrid"
+                ItemsProvider=GetItemsAsync
+                Pagination="_pagination"
+                TGridItem=DmoWeatherForecast>
+    <PropertyColumn Title="Id" Property="@(c => c!.WeatherForecastId.Value.ToDisplayId())" Align=Align.Start />
+    <PropertyColumn Title="Date" Property="@(c => c!.Date)" Format="dd-MMM-yy" Sortable="true" IsDefaultSortColumn InitialSortDirection="SortDirection.Ascending" Align=Align.Start />
+    <PropertyColumn Title="Temp &deg; C" Sortable="true" Format="N0" Property="@(c => c!.Temperature.TemperatureC)" Align=Align.End />
+    <PropertyColumn Title="Temp &deg; F" Sortable="true" Format="N0" Property="@(c => c!.Temperature.TemperatureF)" Align=Align.End />
+    <PropertyColumn Title="Summary" Sortable="true" Property="@(c => c!.Summary)" Align=Align.Center />
+    <TemplateColumn Title="Actions" Align="@Align.End">
+        <FluentButton aria-label="View item" IconEnd="@(new Icons.Regular.Size16.ContentView())" OnClick="() => OnViewAsync(context.WeatherForecastId)" />
+        <FluentButton aria-label="Edit item" IconEnd="@(new Icons.Regular.Size16.Edit())" OnClick="() => OnEditAsync(context.WeatherForecastId)" />
+    </TemplateColumn>
+</FluentDataGrid>
+
+@code {
+
+    [Parameter] public int PageSize { get; set; } = 10;
+
+    IFluentGridPresenter Presenter = default!;
+
+    private FluentDataGrid<DmoWeatherForecast>? _fluentDataGrid;
+    private PaginationState _pagination = new PaginationState { ItemsPerPage = 10 };
+    private GridSort<DmoWeatherForecast> sortByName = GridSort<DmoWeatherForecast>
+    .ByAscending(p => p.Temperature.TemperatureC);
+
+
+    private async Task OnEditAsync(WeatherForecastId id)
+    {
+        var dialog = await DialogService.ShowDialogAsync<WeatherForecastEditForm>(id, new DialogParameters()
+        {
+            Title = $"Edit Weather Forecast",
+            PreventDismissOnOverlayClick = true,
+            PreventScroll = true,
+        });
+
+        var result = await dialog.Result;
+
+        if (!result.Cancelled && _fluentDataGrid is not null)
+            await _fluentDataGrid!.RefreshDataAsync();
+    }
+
+    private async Task OnViewAsync(WeatherForecastId id)
+    {
+        var dialog = await DialogService.ShowDialogAsync<WeatherForecastViewForm>(id, new DialogParameters()
+        {
+            Title = $"View Weather Forecast",
+            PreventDismissOnOverlayClick = true,
+            PreventScroll = true,
+        });
+
+        var result = await dialog.Result;
+    }
+
+    private async Task OnAddAsync()
+    {
+        var id = new WeatherForecastId(Guid.Empty);
+        var dialog = await DialogService.ShowDialogAsync<WeatherForecastEditForm>(id, new DialogParameters()
+        {
+            Title = $"New Weather Forecast",
+            PreventDismissOnOverlayClick = true,
+            PreventScroll = true,
+        });
+
+        var result = await dialog.Result;
+
+        if (!result.Cancelled && _fluentDataGrid is not null)
+            await _fluentDataGrid.RefreshDataAsync();
+    }
+
+    public ValueTask<GridItemsProviderResult<DmoWeatherForecast>>
+        GetItemsAsync(GridItemsProviderRequest<DmoWeatherForecast> request) =>
+            Presenter.GetItemsAsync<DmoWeatherForecast>(request);
+
+    public override async Task SetParametersAsync(ParameterView parameters)
+    {
+        parameters.SetParameterProperties(this);
+
+        if (Presenter is null)
+        {
+            Presenter = await PresenterFactory.CreateDataGridPresenterAsync();
+        }
+
+        await base.SetParametersAsync(ParameterView.Empty);
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (PageSize != _pagination.ItemsPerPage)
+        {
+            _pagination.ItemsPerPage = PageSize;
+        }
+    }
+
+}

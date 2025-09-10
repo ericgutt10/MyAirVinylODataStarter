@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{F95F473B-E98A-ACD6-1986-755F447BE36F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.ServerHost", "App\ServiceHost\App.ServerHost.csproj", "{A69F2310-4D16-0E31-758B-64B5C697E7D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.AirVinyl", "App\AirVinyl\App.AirVinyl.csproj", "{5007B762-5307-7CA2-EE06-34ACC81D67F7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AirVinyContext", "Data\AirVinyContext\AirVinyContext.csproj", "{E54E24DA-1443-1E2C-6DD3-34EE30BD0A32}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A69F2310-4D16-0E31-758B-64B5C697E7D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A69F2310-4D16-0E31-758B-64B5C697E7D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A69F2310-4D16-0E31-758B-64B5C697E7D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A69F2310-4D16-0E31-758B-64B5C697E7D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5007B762-5307-7CA2-EE06-34ACC81D67F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5007B762-5307-7CA2-EE06-34ACC81D67F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5007B762-5307-7CA2-EE06-34ACC81D67F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5007B762-5307-7CA2-EE06-34ACC81D67F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E54E24DA-1443-1E2C-6DD3-34EE30BD0A32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E54E24DA-1443-1E2C-6DD3-34EE30BD0A32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E54E24DA-1443-1E2C-6DD3-34EE30BD0A32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E54E24DA-1443-1E2C-6DD3-34EE30BD0A32}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A69F2310-4D16-0E31-758B-64B5C697E7D6} = {F95F473B-E98A-ACD6-1986-755F447BE36F}
+		{5007B762-5307-7CA2-EE06-34ACC81D67F7} = {F95F473B-E98A-ACD6-1986-755F447BE36F}
+		{E54E24DA-1443-1E2C-6DD3-34EE30BD0A32} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {61606D87-5C96-4465-8EDB-230D67917F1B}
+	EndGlobalSection
+EndGlobal

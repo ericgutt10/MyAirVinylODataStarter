@@ -1,0 +1,15 @@
+@App.ServerHost_HostAddress = http://localhost:5220
+
+GET {{App.ServerHost_HostAddress}}/odata/People
+Accept: application/json
+
+###
+GET {{App.ServerHost_HostAddress}}/odata/People(1)
+Accept: application/json
+
+###
+
+GET {{App.ServerHost_HostAddress}}/odata/Records
+Accept: application/json
+
+###

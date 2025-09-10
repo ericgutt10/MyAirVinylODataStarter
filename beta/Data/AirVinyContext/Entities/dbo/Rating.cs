@@ -11,13 +11,13 @@ namespace AirVinyContext.Entities;
 public partial class Rating
 {
     [Key]
-    public int Id { get; set; }
+    public int RatingId { get; set; }
 
     public int Value { get; set; }
 
-    //public int PersonId { get; set; }
+    public int PersonId { get; set; }
 
-    //public int RecordStoreId { get; set; }
+    public int RecordStoreId { get; set; }
 
     //public virtual Person Person { get; set; } = null!;
 

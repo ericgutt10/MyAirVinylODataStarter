@@ -1,10 +1,16 @@
 using AirVinyContext.Entities;
 using App.AirVinyl.Module3.Services;
+using App.AirVinyl.Module3.Validation;
+using App.ServerHost.CustomFilters;
 using Carter;
+using Microsoft.AspNetCore.Http.Json;
 using Microsoft.AspNetCore.OData;
 using Microsoft.AspNetCore.OData.Query;
 using Microsoft.EntityFrameworkCore;
 using static App.AirVinyl.Module3.EdmModel.Module3ModelBuilder;
+
+// For JSON Seriaization Policy
+using JsonOptions = Microsoft.AspNetCore.Http.Json.JsonOptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +18,11 @@ builder.Services.ConfigureHttpJsonOptions(options =>
 {
     options.SerializerOptions.WriteIndented = true;
     options.SerializerOptions.IncludeFields = true;
+});
+
+builder.Services.Configure<JsonOptions>(options =>
+{
+    options.SerializerOptions.PropertyNamingPolicy = null;
 });
 
 // Add services to the container.

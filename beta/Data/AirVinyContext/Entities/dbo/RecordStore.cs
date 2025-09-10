@@ -12,7 +12,7 @@ namespace AirVinyContext.Entities;
 public partial class RecordStore
 {
     [Key]
-    public int Id { get; set; }
+    public int RecordStoreId { get; set; }
 
     [StringLength(150)]
     public string Name { get; set; } = null!;
@@ -24,5 +24,5 @@ public partial class RecordStore
     [StringLength(34)]
     public string Discriminator { get; set; } = null!;
 
-    //public virtual IList<Rating> Ratings { get; } = [];
+    public IList<Rating> Ratings { get; } = [];
 }

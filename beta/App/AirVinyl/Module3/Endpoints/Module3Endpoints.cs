@@ -1,17 +1,12 @@
 using AirVinyContext.Entities;
+using App.ServerHost.CustomFilters;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData;
-using Microsoft.AspNetCore.OData.Formatter;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Microsoft.OData;
 using Microsoft.OData.Edm;
 using Microsoft.OData.UriParser;
-using System.Threading.Tasks;
-using System.Web.Http.Controllers;
 using static App.AirVinyl.Module3.EdmModel.Module3ModelBuilder;
 using static App.AirVinyl.Module3.Handlers.Module3Handlers;
 
@@ -21,7 +16,7 @@ public class Module3Endpoints : ICarterModule
 {
     public void AddRoutes(IEndpointRouteBuilder app)
     {
-        ODataMessageWriterSettings settings = new ODataMessageWriterSettings
+        ODataMessageWriterSettings settings = new()
         {
             EnableMessageStreamDisposal = false,
             MessageQuotas = new ODataMessageQuotas { MaxReceivedMessageSize = Int64.MaxValue },
@@ -38,8 +33,15 @@ public class Module3Endpoints : ICarterModule
             .WithODataResult()
             ;
 
+        odataGroup.MapPost("/People",
+            //(MyAirVinylCtx ctx, HttpContext http, [FromBody] Person? person) => FuncExpr.ReturnQuery(CreatePerson, ctx, http, person))
+            CreatePerson)
+            .AddEndpointFilter<ModelValidationFilter<Person>>()
+            .WithODataResult()
+            ;
 
-        odataGroup.MapGet("/People/Records", (MyAirVinylCtx ctx) => FuncExpr.ReturnQuery(GetPeopleRecords, ctx))
+
+        odataGroup.MapGet("/People/RecordsRatings", (MyAirVinylCtx ctx) => FuncExpr.ReturnQuery(GetPeopleRecords, ctx))
             .WithODataModel(AirVinylMod3Model)
             .WithODataResult()
         ;
@@ -58,16 +60,39 @@ public class Module3Endpoints : ICarterModule
             .WithODataResult()
         ;
 
-        odataGroup.MapGet("/Records",
+        odataGroup.MapGet("/People({key})/Ratings",
+        async (MyAirVinylCtx ctx, int key) => await FuncExpr.ReturnSingleAsync(GetPersonRatingsAsync, ctx, key))
+            .WithODataPathFactory((h, t) =>
+            {
+                IEdmEntitySet people = AirVinylMod3Model.FindDeclaredEntitySet("People");
+                return new ODataPath(new EntitySetSegment(people));
+            })
+            .WithODataModel(AirVinylMod3Model)
+            .WithODataResult()
+;
+
+        odataGroup.MapGet("/RecordsAsync",
             async (MyAirVinylCtx ctx) => await FuncExpr.ReturnQueryAsync(GetRecordsAsync, ctx))
+            //.WithODataPathFactory((h, t) =>
+            //{
+            //    IEdmEntitySet people = AirVinylMod3Model.FindDeclaredEntitySet("People");
+            //    return new ODataPath(new EntitySetSegment(people));
+            //})
+            //.WithODataModel(AirVinylMod3Model)
+            .WithODataVersion(ODataVersion.V401)
+            .WithODataServices(srv => srv.AddScoped(sp => settings))
             .WithODataResult()
             ;
+
+        odataGroup.MapGet("/Records",
+                (MyAirVinylCtx ctx) =>  FuncExpr.ReturnQuery(GetRecords, ctx))
+                .WithODataResult()
+    ;
     }
 }
 
 public static class FuncExpr
 {
-
     public static object ReturnSingle<TCtx, TDbSet>(this
         Func<TCtx, int, TDbSet?> func,
         TCtx ctx,
@@ -93,7 +118,6 @@ public static class FuncExpr
             TDbSet dbset => dbset,
             _ => Results.NotFound()
         };
-
     }
 
     public static object ReturnQuery<TCtx, TDbSet>(this
@@ -121,6 +145,5 @@ public static class FuncExpr
             IQueryable<TDbSet> dbset => dbset,
             _ => Results.NotFound()
         };
-
     }
 }

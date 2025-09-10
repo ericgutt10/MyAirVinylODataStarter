@@ -28,7 +28,7 @@ public partial class VinylRecord
 
     //public Person Person { get; set; } = null!;
 
-    //public int PressingDetailId { get; set; }
+    public int PressingDetailId { get; set; }
 
 
     //public virtual PressingDetail PressingDetail { get; set; } = null!;

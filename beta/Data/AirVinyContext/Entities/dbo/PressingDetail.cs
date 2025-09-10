@@ -11,7 +11,7 @@ namespace AirVinyContext.Entities;
 public partial class PressingDetail
 {
     [Key]
-    public int Id { get; set; }
+    public int PressingDetailId { get; set; }
 
     public int Grams { get; set; }
 
@@ -20,5 +20,5 @@ public partial class PressingDetail
     [StringLength(200)]
     public string Description { get; set; } = null!;
 
-    //public virtual IList<VinylRecord> VinylRecords { get; set; } = [];
+    public IList<VinylRecord> VinylRecords { get; set; } = [];
 }

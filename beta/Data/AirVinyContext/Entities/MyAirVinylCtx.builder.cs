@@ -9,36 +9,36 @@ public partial class MyAirVinylCtx : DbContext
 {
     partial void OnModelCreatingPartial(ModelBuilder modelBuilder)
     {
-        //modelBuilder.Entity<PressingDetail>().HasData(
-        //    new PressingDetail()
-        //    {
-        //        Id = 1,
-        //        Description = "Audiophile LP",
-        //        Grams = 180,
-        //        Inches = 12
-        //    },
-        //    new PressingDetail()
-        //    {
-        //        Id = 2,
-        //        Description = "Regular LP",
-        //        Grams = 140,
-        //        Inches = 12
-        //    },
-        //    new PressingDetail()
-        //    {
-        //        Id = 3,
-        //        Description = "Audiophile Single",
-        //        Grams = 50,
-        //        Inches = 7
-        //    },
-        //    new PressingDetail()
-        //    {
-        //        Id = 4,
-        //        Description = "Regular Single",
-        //        Grams = 40,
-        //        Inches = 7
-        //    }
-        //);
+        modelBuilder.Entity<PressingDetail>().HasData(
+            new PressingDetail()
+            {
+                PressingDetailId = 1,
+                Description = "Audiophile LP",
+                Grams = 180,
+                Inches = 12
+            },
+            new PressingDetail()
+            {
+                PressingDetailId = 2,
+                Description = "Regular LP",
+                Grams = 140,
+                Inches = 12
+            },
+            new PressingDetail()
+            {
+                PressingDetailId = 3,
+                Description = "Audiophile Single",
+                Grams = 50,
+                Inches = 7
+            },
+            new PressingDetail()
+            {
+                PressingDetailId = 4,
+                Description = "Regular Single",
+                Grams = 40,
+                Inches = 7
+            }
+        );
 
         modelBuilder.Entity<Person>().Property(p => p.AmountOfCashToSpend).HasColumnType("decimal(8,2)");
 
@@ -119,7 +119,7 @@ public partial class MyAirVinylCtx : DbContext
                 Artist = "Nirvana",
                 Title = "Nevermind",
                 CatalogNumber = "ABC/111",
-                //PressingDetailId = 1,
+                PressingDetailId = 1,
                 Year = 1991
             },
             new VinylRecord()
@@ -129,7 +129,7 @@ public partial class MyAirVinylCtx : DbContext
                 Artist = "Arctic Monkeys",
                 Title = "AM",
                 CatalogNumber = "EUI/111",
-                //PressingDetailId = 2,
+                PressingDetailId = 2,
                 Year = 2013
             },
             new VinylRecord()
@@ -139,7 +139,7 @@ public partial class MyAirVinylCtx : DbContext
                 Artist = "Beatles",
                 Title = "The White Album",
                 CatalogNumber = "DEI/113",
-                //PressingDetailId = 2,
+                PressingDetailId = 2,
                 Year = 1968
             },
             new VinylRecord()
@@ -149,7 +149,7 @@ public partial class MyAirVinylCtx : DbContext
                 Artist = "Beatles",
                 Title = "Sergeant Pepper's Lonely Hearts Club Band",
                 CatalogNumber = "DPI/123",
-                //PressingDetailId = 2,
+                PressingDetailId = 2,
                 Year = 1967
             },
             new VinylRecord()
@@ -159,7 +159,7 @@ public partial class MyAirVinylCtx : DbContext
                 Artist = "Nirvana",
                 Title = "Bleach",
                 CatalogNumber = "DPI/123",
-                //PressingDetailId = 1,
+                PressingDetailId = 1,
                 Year = 1989
             },
             new VinylRecord()
@@ -169,7 +169,7 @@ public partial class MyAirVinylCtx : DbContext
                 Artist = "Leonard Cohen",
                 Title = "Suzanne",
                 CatalogNumber = "PPP/783",
-                //PressingDetailId = 3,
+                PressingDetailId = 3,
                 Year = 1967
             },
             new VinylRecord()
@@ -179,7 +179,7 @@ public partial class MyAirVinylCtx : DbContext
                 Artist = "Marvin Gaye",
                 Title = "What's Going On",
                 CatalogNumber = "MVG/445",
-                //PressingDetailId = 1,
+                PressingDetailId = 1,
                 Year = null
             },
             new VinylRecord()
@@ -189,7 +189,7 @@ public partial class MyAirVinylCtx : DbContext
                 Artist = "Nirvana",
                 Title = "Nevermind",
                 CatalogNumber = "ABC/111",
-                //PressingDetailId = 1,
+                PressingDetailId = 1,
                 Year = 1991
             },
             new VinylRecord()
@@ -199,7 +199,7 @@ public partial class MyAirVinylCtx : DbContext
                 Artist = "Cher",
                 Title = "Closer to the Truth",
                 CatalogNumber = "CHE/190",
-                //PressingDetailId = 2,
+                PressingDetailId = 2,
                 Year = 2013
             },
             new VinylRecord()
@@ -209,7 +209,7 @@ public partial class MyAirVinylCtx : DbContext
                 Artist = "The Dandy Warhols",
                 Title = "Thirteen Tales From Urban Bohemia",
                 CatalogNumber = "TDW/516",
-                //PressingDetailId = 2
+                PressingDetailId = 2
             },
             new VinylRecord()
             {
@@ -218,7 +218,7 @@ public partial class MyAirVinylCtx : DbContext
                 Artist = "Justin Bieber",
                 Title = "Baby",
                 CatalogNumber = "OOP/098",
-                //PressingDetailId = 3
+                PressingDetailId = 3
             },
             new VinylRecord()
             {
@@ -227,7 +227,7 @@ public partial class MyAirVinylCtx : DbContext
                 Artist = "The Prodigy",
                 Title = "Music for the Jilted Generation",
                 CatalogNumber = "NBE/864",
-                //PressingDetailId = 2
+                PressingDetailId = 2
             },
             new VinylRecord()
             {
@@ -236,7 +236,7 @@ public partial class MyAirVinylCtx : DbContext
                 Artist = "Anne Clarke",
                 Title = "Our Darkness",
                 CatalogNumber = "TII/339",
-                //PressingDetailId = 3
+                PressingDetailId = 3
             },
             new VinylRecord()
             {
@@ -245,7 +245,7 @@ public partial class MyAirVinylCtx : DbContext
                 Artist = "Dead Kennedys",
                 Title = "Give Me Convenience or Give Me Death",
                 CatalogNumber = "DKE/864",
-                //PressingDetailId = 2
+                PressingDetailId = 2
             },
             new VinylRecord()
             {
@@ -254,7 +254,7 @@ public partial class MyAirVinylCtx : DbContext
                 Artist = "Sisters of Mercy",
                 Title = "Temple of Love",
                 CatalogNumber = "IIE/824",
-                //PressingDetailId = 4
+                PressingDetailId = 4
             },
             new VinylRecord()
             {
@@ -263,7 +263,7 @@ public partial class MyAirVinylCtx : DbContext
                 Artist = "Abba",
                 Title = "Gimme Gimme Gimme",
                 CatalogNumber = "TDW/516",
-                //PressingDetailId = 4
+                PressingDetailId = 4
             }
         );
 
@@ -273,128 +273,128 @@ public partial class MyAirVinylCtx : DbContext
               v => v.Aggregate(0, (a, f) => HashCode.Combine(a, f.GetHashCode())),
               v => v.ToList());
 
-        //modelBuilder.Entity<RecordStore>()
-        //    .Property(r => r.Tags)
-        //    .HasConversion(
-        //        v => JsonSerializer.Serialize(v, (JsonSerializerOptions?)null),
-        //        v => JsonSerializer.Deserialize<List<string>>(v, (JsonSerializerOptions?)null) ?? new List<string>());
+        modelBuilder.Entity<RecordStore>()
+            .Property(r => r.Tags)
+            .HasConversion(
+                v => JsonSerializer.Serialize(v, (JsonSerializerOptions?)null),
+                v => JsonSerializer.Deserialize<List<string>>(v, (JsonSerializerOptions?)null) ?? new List<string>());
 
-        //modelBuilder.Entity<RecordStore>()
-        //   .Property(r => r.Tags)
-        //   .Metadata
-        //   .SetValueComparer(stringListValueComparer);
+        modelBuilder.Entity<RecordStore>()
+           .Property(r => r.Tags)
+           .Metadata
+           .SetValueComparer(stringListValueComparer);
 
-        //// address is an owned type (= type without id)
-        //modelBuilder.Entity<RecordStore>().OwnsOne(p => p.StoreAddress);
+        // address is an owned type (= type without id)
+        modelBuilder.Entity<RecordStore>().OwnsOne(p => p.StoreAddress);
 
-        //modelBuilder.Entity<SpecializedRecordStore>(c =>
-        //{
-        //    c.HasData(new SpecializedRecordStore()
-        //    {
-        //        Id = 2,
-        //        Name = "Indie Records, Inc",
-        //        Tags = new List<string>() { "Rock", "Indie", "Alternative" },
-        //        Specialization = "Indie"
-        //    },
-        //     new SpecializedRecordStore()
-        //     {
-        //         Id = 3,
-        //         Name = "Rock Records, Inc",
-        //         Tags = new List<string>() { "Rock", "Pop" },
-        //         Specialization = "Rock"
-        //     });
+        modelBuilder.Entity<SpecializedRecordStore>(c =>
+        {
+            c.HasData(new SpecializedRecordStore()
+            {
+                RecordStoreId = 2,
+                Name = "Indie Records, Inc",
+                Tags = new List<string>() { "Rock", "Indie", "Alternative" },
+                Specialization = "Indie"
+            },
+             new SpecializedRecordStore()
+             {
+                 RecordStoreId = 3,
+                 Name = "Rock Records, Inc",
+                 Tags = new List<string>() { "Rock", "Pop" },
+                 Specialization = "Rock"
+             });
 
-        //    c.OwnsOne(r => r.StoreAddress).HasData(
-        //      new Address()
-        //      {
-        //          RecordStoreId = 2,
-        //          City = "Antwerp",
-        //          PostalCode = "2000",
-        //          Street = "1, Main Street",
-        //          Country = "Belgium"
-        //      },
-        //      new Address()
-        //      {
-        //          RecordStoreId = 3,
-        //          City = "Antwerp",
-        //          PostalCode = "2000",
-        //          Street = "5, Big Street",
-        //          Country = "Belgium"
-        //      }
-        //  );
-        //});
+            c.OwnsOne(r => r.StoreAddress).HasData(
+              new Address()
+              {
+                  RecordStoreId = 2,
+                  City = "Antwerp",
+                  PostalCode = "2000",
+                  Street = "1, Main Street",
+                  Country = "Belgium"
+              },
+              new Address()
+              {
+                  RecordStoreId = 3,
+                  City = "Antwerp",
+                  PostalCode = "2000",
+                  Street = "5, Big Street",
+                  Country = "Belgium"
+              }
+          );
+        });
 
-        //modelBuilder.Entity<RecordStore>(c =>
-        //{
-        //    c.HasData(new RecordStore()
-        //    {
-        //        Id = 1,
-        //        Name = "All Your Music Needs",
-        //        Tags = ["Rock", "Pop", "Indie", "Alternative"]
-        //    });
+        modelBuilder.Entity<RecordStore>(c =>
+        {
+            c.HasData(new RecordStore()
+            {
+                RecordStoreId = 1,
+                Name = "All Your Music Needs",
+                Tags = ["Rock", "Pop", "Indie", "Alternative"]
+            });
 
-        //    c.OwnsOne(r => r.StoreAddress).HasData(
-        //       new Address()
-        //       {
-        //           RecordStoreId = 1,
-        //           City = "Antwerp",
-        //           PostalCode = "2000",
-        //           Street = "25, Fluffy Road",
-        //           Country = "Belgium"
-        //       }
-        //  );
-        //});
+            c.OwnsOne(r => r.StoreAddress).HasData(
+               new Address()
+               {
+                   RecordStoreId = 1,
+                   City = "Antwerp",
+                   PostalCode = "2000",
+                   Street = "25, Fluffy Road",
+                   Country = "Belgium"
+               }
+          );
+        });
 
-        //modelBuilder.Entity<Rating>().HasData(
-        //    new Rating()
-        //    {
-        //        Id = 1,
-        //        //RecordStoreId = 1,
-        //        //PersonId = 1,
-        //        Value = 4
-        //    },
-        //    new Rating()
-        //    {
-        //        Id = 2,
-        //        //RecordStoreId = 1,
-        //        //PersonId = 2,
-        //        Value = 4
-        //    },
-        //    new Rating()
-        //    {
-        //        Id = 3,
-        //        //RecordStoreId = 1,
-        //        //PersonId = 3,
-        //        Value = 4
-        //    },
-        //    new Rating()
-        //    {
-        //        Id = 4,
-        //        //RecordStoreId = 2,
-        //        //PersonId = 1,
-        //        Value = 5
-        //    },
-        //    new Rating()
-        //    {
-        //        Id = 5,
-        //        //RecordStoreId = 2,
-        //        //PersonId = 2,
-        //        Value = 4
-        //    },
-        //    new Rating()
-        //    {
-        //        Id = 6,
-        //        //RecordStoreId = 3,
-        //        //PersonId = 3,
-        //        Value = 5
-        //    },
-        //    new Rating()
-        //    {
-        //        Id = 7,
-        //        //RecordStoreId = 3,
-        //        //PersonId = 2,
-        //        Value = 4
-        //    }
-        //);
+        modelBuilder.Entity<Rating>().HasData(
+            new Rating()
+            {
+                RatingId = 1,
+                RecordStoreId = 1,
+                PersonId = 1,
+                Value = 4
+            },
+            new Rating()
+            {
+                RatingId = 2,
+                RecordStoreId = 1,
+                PersonId = 2,
+                Value = 4
+            },
+            new Rating()
+            {
+                RatingId = 3,
+                RecordStoreId = 1,
+                PersonId = 3,
+                Value = 4
+            },
+            new Rating()
+            {
+                RatingId = 4,
+                RecordStoreId = 2,
+                PersonId = 1,
+                Value = 5
+            },
+            new Rating()
+            {
+                RatingId = 5,
+                RecordStoreId = 2,
+                PersonId = 2,
+                Value = 4
+            },
+            new Rating()
+            {
+                RatingId = 6,
+                RecordStoreId = 3,
+                PersonId = 3,
+                Value = 5
+            },
+            new Rating()
+            {
+                RatingId = 7,
+                RecordStoreId = 3,
+                PersonId = 2,
+                Value = 4
+            }
+        );
     }
 }

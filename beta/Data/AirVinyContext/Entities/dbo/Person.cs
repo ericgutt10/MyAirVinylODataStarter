@@ -34,6 +34,6 @@ public partial class Person
 
     public IList<VinylRecord> VinylRecords { get; set; } = [];
 
-    //public virtual IList<Rating> Ratings { get; set; } = [];
+    public IList<Rating> Ratings { get; set; } = [];
 
 }

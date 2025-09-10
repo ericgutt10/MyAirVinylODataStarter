@@ -1,5 +1,7 @@
 using AirVinyContext.Entities;
 using App.AirVinyl.Lib;
+using App.AirVinyl.Module3.Validation;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -27,6 +29,7 @@ public static class Module3ApiServices
         });
 
         // Add any individual entity services
+        services.AddValidatorsFromAssemblyContaining<PersonValidator>();
         return services
             ;
     }

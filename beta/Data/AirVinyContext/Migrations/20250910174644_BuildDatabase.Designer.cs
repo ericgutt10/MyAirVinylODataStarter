@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AirVinyContext.Migrations
 {
     [DbContext(typeof(MyAirVinylCtx))]
-    [Migration("20250909190022_BuildDatabase")]
+    [Migration("20250910174644_BuildDatabase")]
     partial class BuildDatabase
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace AirVinyContext.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.8")
+                .HasAnnotation("ProductVersion", "9.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -131,6 +131,176 @@ namespace AirVinyContext.Migrations
                         });
                 });
 
+            modelBuilder.Entity("AirVinyContext.Entities.PressingDetail", b =>
+                {
+                    b.Property<int>("PressingDetailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PressingDetailId"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("Grams")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Inches")
+                        .HasColumnType("int");
+
+                    b.HasKey("PressingDetailId");
+
+                    b.ToTable("PressingDetail");
+
+                    b.HasData(
+                        new
+                        {
+                            PressingDetailId = 1,
+                            Description = "Audiophile LP",
+                            Grams = 180,
+                            Inches = 12
+                        },
+                        new
+                        {
+                            PressingDetailId = 2,
+                            Description = "Regular LP",
+                            Grams = 140,
+                            Inches = 12
+                        },
+                        new
+                        {
+                            PressingDetailId = 3,
+                            Description = "Audiophile Single",
+                            Grams = 50,
+                            Inches = 7
+                        },
+                        new
+                        {
+                            PressingDetailId = 4,
+                            Description = "Regular Single",
+                            Grams = 40,
+                            Inches = 7
+                        });
+                });
+
+            modelBuilder.Entity("AirVinyContext.Entities.Rating", b =>
+                {
+                    b.Property<int>("RatingId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RatingId"));
+
+                    b.Property<int>("PersonId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RecordStoreId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Value")
+                        .HasColumnType("int");
+
+                    b.HasKey("RatingId");
+
+                    b.HasIndex("PersonId");
+
+                    b.HasIndex("RecordStoreId");
+
+                    b.ToTable("Rating");
+
+                    b.HasData(
+                        new
+                        {
+                            RatingId = 1,
+                            PersonId = 1,
+                            RecordStoreId = 1,
+                            Value = 4
+                        },
+                        new
+                        {
+                            RatingId = 2,
+                            PersonId = 2,
+                            RecordStoreId = 1,
+                            Value = 4
+                        },
+                        new
+                        {
+                            RatingId = 3,
+                            PersonId = 3,
+                            RecordStoreId = 1,
+                            Value = 4
+                        },
+                        new
+                        {
+                            RatingId = 4,
+                            PersonId = 1,
+                            RecordStoreId = 2,
+                            Value = 5
+                        },
+                        new
+                        {
+                            RatingId = 5,
+                            PersonId = 2,
+                            RecordStoreId = 2,
+                            Value = 4
+                        },
+                        new
+                        {
+                            RatingId = 6,
+                            PersonId = 3,
+                            RecordStoreId = 3,
+                            Value = 5
+                        },
+                        new
+                        {
+                            RatingId = 7,
+                            PersonId = 2,
+                            RecordStoreId = 3,
+                            Value = 4
+                        });
+                });
+
+            modelBuilder.Entity("AirVinyContext.Entities.RecordStore", b =>
+                {
+                    b.Property<int>("RecordStoreId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RecordStoreId"));
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasMaxLength(34)
+                        .HasColumnType("nvarchar(34)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
+
+                    b.Property<string>("Tags")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RecordStoreId");
+
+                    b.ToTable("RecordStore");
+
+                    b.HasDiscriminator().HasValue("RecordStore");
+
+                    b.UseTphMappingStrategy();
+
+                    b.HasData(
+                        new
+                        {
+                            RecordStoreId = 1,
+                            Name = "All Your Music Needs",
+                            Tags = "[\"Rock\",\"Pop\",\"Indie\",\"Alternative\"]"
+                        });
+                });
+
             modelBuilder.Entity("AirVinyContext.Entities.VinylRecord", b =>
                 {
                     b.Property<int>("VinylRecordId")
@@ -151,6 +321,9 @@ namespace AirVinyContext.Migrations
                     b.Property<int>("PersonId")
                         .HasColumnType("int");
 
+                    b.Property<int>("PressingDetailId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(150)
@@ -163,6 +336,8 @@ namespace AirVinyContext.Migrations
 
                     b.HasIndex("PersonId");
 
+                    b.HasIndex("PressingDetailId");
+
                     b.ToTable("VinylRecords");
 
                     b.HasData(
@@ -172,6 +347,7 @@ namespace AirVinyContext.Migrations
                             Artist = "Nirvana",
                             CatalogNumber = "ABC/111",
                             PersonId = 1,
+                            PressingDetailId = 1,
                             Title = "Nevermind",
                             Year = 1991
                         },
@@ -181,6 +357,7 @@ namespace AirVinyContext.Migrations
                             Artist = "Arctic Monkeys",
                             CatalogNumber = "EUI/111",
                             PersonId = 1,
+                            PressingDetailId = 2,
                             Title = "AM",
                             Year = 2013
                         },
@@ -190,6 +367,7 @@ namespace AirVinyContext.Migrations
                             Artist = "Beatles",
                             CatalogNumber = "DEI/113",
                             PersonId = 1,
+                            PressingDetailId = 2,
                             Title = "The White Album",
                             Year = 1968
                         },
@@ -199,6 +377,7 @@ namespace AirVinyContext.Migrations
                             Artist = "Beatles",
                             CatalogNumber = "DPI/123",
                             PersonId = 1,
+                            PressingDetailId = 2,
                             Title = "Sergeant Pepper's Lonely Hearts Club Band",
                             Year = 1967
                         },
@@ -208,6 +387,7 @@ namespace AirVinyContext.Migrations
                             Artist = "Nirvana",
                             CatalogNumber = "DPI/123",
                             PersonId = 1,
+                            PressingDetailId = 1,
                             Title = "Bleach",
                             Year = 1989
                         },
@@ -217,6 +397,7 @@ namespace AirVinyContext.Migrations
                             Artist = "Leonard Cohen",
                             CatalogNumber = "PPP/783",
                             PersonId = 1,
+                            PressingDetailId = 3,
                             Title = "Suzanne",
                             Year = 1967
                         },
@@ -226,6 +407,7 @@ namespace AirVinyContext.Migrations
                             Artist = "Marvin Gaye",
                             CatalogNumber = "MVG/445",
                             PersonId = 1,
+                            PressingDetailId = 1,
                             Title = "What's Going On"
                         },
                         new
@@ -234,6 +416,7 @@ namespace AirVinyContext.Migrations
                             Artist = "Nirvana",
                             CatalogNumber = "ABC/111",
                             PersonId = 2,
+                            PressingDetailId = 1,
                             Title = "Nevermind",
                             Year = 1991
                         },
@@ -243,6 +426,7 @@ namespace AirVinyContext.Migrations
                             Artist = "Cher",
                             CatalogNumber = "CHE/190",
                             PersonId = 2,
+                            PressingDetailId = 2,
                             Title = "Closer to the Truth",
                             Year = 2013
                         },
@@ -252,6 +436,7 @@ namespace AirVinyContext.Migrations
                             Artist = "The Dandy Warhols",
                             CatalogNumber = "TDW/516",
                             PersonId = 3,
+                            PressingDetailId = 2,
                             Title = "Thirteen Tales From Urban Bohemia"
                         },
                         new
@@ -260,6 +445,7 @@ namespace AirVinyContext.Migrations
                             Artist = "Justin Bieber",
                             CatalogNumber = "OOP/098",
                             PersonId = 4,
+                            PressingDetailId = 3,
                             Title = "Baby"
                         },
                         new
@@ -268,6 +454,7 @@ namespace AirVinyContext.Migrations
                             Artist = "The Prodigy",
                             CatalogNumber = "NBE/864",
                             PersonId = 4,
+                            PressingDetailId = 2,
                             Title = "Music for the Jilted Generation"
                         },
                         new
@@ -276,6 +463,7 @@ namespace AirVinyContext.Migrations
                             Artist = "Anne Clarke",
                             CatalogNumber = "TII/339",
                             PersonId = 5,
+                            PressingDetailId = 3,
                             Title = "Our Darkness"
                         },
                         new
@@ -284,6 +472,7 @@ namespace AirVinyContext.Migrations
                             Artist = "Dead Kennedys",
                             CatalogNumber = "DKE/864",
                             PersonId = 5,
+                            PressingDetailId = 2,
                             Title = "Give Me Convenience or Give Me Death"
                         },
                         new
@@ -292,6 +481,7 @@ namespace AirVinyContext.Migrations
                             Artist = "Sisters of Mercy",
                             CatalogNumber = "IIE/824",
                             PersonId = 5,
+                            PressingDetailId = 4,
                             Title = "Temple of Love"
                         },
                         new
@@ -300,8 +490,111 @@ namespace AirVinyContext.Migrations
                             Artist = "Abba",
                             CatalogNumber = "TDW/516",
                             PersonId = 6,
+                            PressingDetailId = 4,
                             Title = "Gimme Gimme Gimme"
                         });
+                });
+
+            modelBuilder.Entity("AirVinyContext.Entities.lib.SpecializedRecordStore", b =>
+                {
+                    b.HasBaseType("AirVinyContext.Entities.RecordStore");
+
+                    b.Property<string>("Specialization")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("SpecializedRecordStore");
+
+                    b.HasData(
+                        new
+                        {
+                            RecordStoreId = 2,
+                            Name = "Indie Records, Inc",
+                            Tags = "[\"Rock\",\"Indie\",\"Alternative\"]",
+                            Specialization = "Indie"
+                        },
+                        new
+                        {
+                            RecordStoreId = 3,
+                            Name = "Rock Records, Inc",
+                            Tags = "[\"Rock\",\"Pop\"]",
+                            Specialization = "Rock"
+                        });
+                });
+
+            modelBuilder.Entity("AirVinyContext.Entities.Rating", b =>
+                {
+                    b.HasOne("AirVinyContext.Entities.Person", null)
+                        .WithMany("Ratings")
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AirVinyContext.Entities.RecordStore", null)
+                        .WithMany("Ratings")
+                        .HasForeignKey("RecordStoreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("AirVinyContext.Entities.RecordStore", b =>
+                {
+                    b.OwnsOne("AirVinyContext.Entities.lib.Address", "StoreAddress", b1 =>
+                        {
+                            b1.Property<int>("RecordStoreId")
+                                .HasColumnType("int");
+
+                            b1.Property<string>("City")
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)");
+
+                            b1.Property<string>("Country")
+                                .HasMaxLength(100)
+                                .HasColumnType("nvarchar(100)");
+
+                            b1.Property<string>("PostalCode")
+                                .IsRequired()
+                                .HasMaxLength(10)
+                                .HasColumnType("nvarchar(10)");
+
+                            b1.Property<string>("Street")
+                                .HasMaxLength(200)
+                                .HasColumnType("nvarchar(200)");
+
+                            b1.HasKey("RecordStoreId");
+
+                            b1.ToTable("RecordStore");
+
+                            b1.WithOwner()
+                                .HasForeignKey("RecordStoreId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    RecordStoreId = 2,
+                                    City = "Antwerp",
+                                    Country = "Belgium",
+                                    PostalCode = "2000",
+                                    Street = "1, Main Street"
+                                },
+                                new
+                                {
+                                    RecordStoreId = 3,
+                                    City = "Antwerp",
+                                    Country = "Belgium",
+                                    PostalCode = "2000",
+                                    Street = "5, Big Street"
+                                },
+                                new
+                                {
+                                    RecordStoreId = 1,
+                                    City = "Antwerp",
+                                    Country = "Belgium",
+                                    PostalCode = "2000",
+                                    Street = "25, Fluffy Road"
+                                });
+                        });
+
+                    b.Navigation("StoreAddress");
                 });
 
             modelBuilder.Entity("AirVinyContext.Entities.VinylRecord", b =>
@@ -311,11 +604,29 @@ namespace AirVinyContext.Migrations
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("AirVinyContext.Entities.PressingDetail", null)
+                        .WithMany("VinylRecords")
+                        .HasForeignKey("PressingDetailId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("AirVinyContext.Entities.Person", b =>
                 {
+                    b.Navigation("Ratings");
+
                     b.Navigation("VinylRecords");
+                });
+
+            modelBuilder.Entity("AirVinyContext.Entities.PressingDetail", b =>
+                {
+                    b.Navigation("VinylRecords");
+                });
+
+            modelBuilder.Entity("AirVinyContext.Entities.RecordStore", b =>
+                {
+                    b.Navigation("Ratings");
                 });
 #pragma warning restore 612, 618
         }
